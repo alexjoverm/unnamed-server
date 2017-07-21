@@ -1,0 +1,39 @@
+{
+  "name": "cococode-server",
+  "version": "1.0.0",
+  "description": "Server",
+  "main": "index.js",
+  "scripts": {
+    "lint": "tslint 'src/**/*.ts' 'test/**/*.ts'",
+    "dev": "nodemon",
+    "start": "echo \"Production\"",
+    "test": "echo \"Tests\"",
+    "precommit": "lint-staged"
+  },
+  "author": "",
+  "license": "ISC",
+  "lint-staged": {
+    "{src,test}/**/*.ts": [
+      "prettier --write --no-semi",
+      "git add"
+    ]
+  },
+  "dependencies": {
+    "@nestjs/common": "^3.0.0",
+    "@nestjs/core": "^3.0.1",
+    "@nestjs/microservices": "^3.0.1",
+    "@nestjs/testing": "^3.0.0",
+    "@nestjs/websockets": "^3.0.0",
+    "reflect-metadata": "^0.1.10",
+    "rxjs": "^5.4.2"
+  },
+  "devDependencies": {
+    "@types/node": "^8.0.14",
+    "husky": "^0.14.3",
+    "lint-staged": "^4.0.2",
+    "nodemon": "^1.11.0",
+    "prettier": "^1.5.3",
+    "ts-node": "^3.2.1",
+    "tslint": "^5.5.0"
+  }
+}
