@@ -1,7 +1,10 @@
-import * as express from "express"
+// tslint:disable-next-line
+require("dotenv").config()
+import "reflect-metadata"
+
 import { NestFactory } from "@nestjs/core"
+import { instance } from "./app"
 import { ApplicationModule } from "./modules/app.module"
 
-const instance = express()
 const app = NestFactory.create(ApplicationModule, instance)
 app.listen(3000, () => console.log("Application is listening on port 3000"))
