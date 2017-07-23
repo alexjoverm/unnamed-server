@@ -1,5 +1,6 @@
 // tslint:disable-next-line
 require("dotenv").config()
+import "reflect-metadata"
 
 import { NestFactory } from "@nestjs/core"
 import { instance } from "./app"

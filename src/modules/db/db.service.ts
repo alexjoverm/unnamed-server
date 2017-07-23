@@ -1,10 +1,12 @@
-import { Component } from "@nestjs/common"
-import * as Sequelize from "sequelize"
+import { Component, Shared } from "@nestjs/common"
+import { HttpException } from "@nestjs/core"
+import * as pg from "pg"
+import { Model, Sequelize } from "sequelize-typescript"
 
+@Shared()
 @Component()
 export class DBService {
-  // tslint:disable-next-line
-  private _db
+  private db: Sequelize
 
   constructor() {
     const {
@@ -15,13 +17,17 @@ export class DBService {
       DB_NAME
     } = process.env
 
-    this._db = new Sequelize(DB_NAME, DB_USERNAME, DB_PASSWORD, {
+    this.db = new Sequelize({
       dialect: DB_DRIVER,
-      host: DB_HOST
+      host: DB_HOST,
+      modelPaths: [__dirname + "/models"],
+      name: DB_NAME,
+      password: DB_PASSWORD,
+      username: DB_USERNAME
     })
   }
 
-  public get db() {
-    return this._db
+  public getModel<T>(model: string): T {
+    return this.db.models[model] as any
   }
 }
