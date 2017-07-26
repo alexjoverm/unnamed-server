@@ -25,9 +25,12 @@ export class DBService {
       password: DB_PASSWORD,
       username: DB_USERNAME
     })
+
+    // This will run .sync() only if database name ends with '_test' or '_dev'
+    this.db.sync({ force: true, match: /(_test|_dev)$/ })
   }
 
-  public getModel<T>(model: string): T {
+  public getModel<T>(model: string): any {
     return this.db.models[model] as any
   }
 }

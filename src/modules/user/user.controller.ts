@@ -2,19 +2,19 @@ import { Controller, Get, HttpStatus, Post } from "@nestjs/common"
 import { Request, Response } from "express"
 import { Model } from "sequelize-typescript"
 import { DBService } from "../db/db.service"
-import User from "../db/models/user"
+import { User } from "../db/models/user"
 
 @Controller("users")
 export class UserController {
   private model: typeof User
 
   constructor(db: DBService) {
-    this.model = db.getModel<typeof User>("User")
+    this.model = db.getModel("User")
   }
 
   @Get()
   public async all(req: Request, res: Response) {
-    const users = await this.model.findAndCountAll<User>()
+    const users = await this.model.findAll<User>()
     res.status(HttpStatus.OK).json(users)
   }
 
